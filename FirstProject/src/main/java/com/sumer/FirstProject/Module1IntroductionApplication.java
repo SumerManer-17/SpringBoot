@@ -1,5 +1,6 @@
 package com.sumer.FirstProject;
 
+import com.sumer.FirstProject.Impl.EmailNotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Module1IntroductionApplication implements CommandLineRunner {
 	@Autowired
-	PaymentService paymentService;
+	NotificationService notificationServiceObj;//This is the dependency injection
 
 	public static void main(String[] args) {
 		SpringApplication.run(Module1IntroductionApplication.class, args);
@@ -18,7 +19,8 @@ public class Module1IntroductionApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println(paymentService.hashCode());
-		paymentService.pay();
+		//NotificationService notificationServiceObj=new EmailNotificationService();
+
+		notificationServiceObj.send("Hello Sumer");
 	}
 }
