@@ -52,7 +52,13 @@ public class EmployeeController {
     }
 
     @PutMapping (path="/{employeeId}")
-    EmployeeDTO updateEmployeeById(@RequestBody EmployeeDTO employeeDTO,@PathVariable Long employeeId){
+    public EmployeeDTO updateEmployeeById(@RequestBody EmployeeDTO employeeDTO,@PathVariable Long employeeId){
         return employeeService.updateEmployeeById(employeeId,employeeDTO);
     }
+
+    @DeleteMapping (path="/{employeeId}")
+    public void deleteEmployeeById(@PathVariable Long employeeId){
+        employeeService.deleteEmployeeById(employeeId);
+    }
+
 }
