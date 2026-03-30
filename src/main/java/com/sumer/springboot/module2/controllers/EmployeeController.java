@@ -50,4 +50,9 @@ public class EmployeeController {
 
         return employeeService.createNewEmployee(inputEmployee);
     }
+
+    @PutMapping (path="/{employeeId}")
+    EmployeeDTO updateEmployeeById(@RequestBody EmployeeDTO employeeDTO,@PathVariable Long employeeId){
+        return employeeService.updateEmployeeById(employeeId,employeeDTO);
+    }
 }
