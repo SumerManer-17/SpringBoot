@@ -4,9 +4,14 @@ import com.sumer.springboot.module2.dto.EmployeeDTO;
 import com.sumer.springboot.module2.entities.EmployeeEntity;
 import com.sumer.springboot.module2.repositories.EmployeeRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.util.ReflectionUtils;
 import org.springframework.stereotype.Service;
 
+
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,8 +55,27 @@ public class EmployeeService {
         return modelMapper.map(savedEmployeeEntity,EmployeeDTO.class);
     }
 
+    public boolean isExistByEmplyeeId(Long employeeId){
+        return employeeRepository.existsById(employeeId);
+    }
 
-    public void deleteEmployeeById(Long employeeId) {
+
+    public boolean deleteEmployeeById(Long employeeId) {
+        boolean exists=isExistByEmplyeeId(employeeId);
+        if(!exists) return false;
         employeeRepository.deleteById(employeeId);
+        return true;
+    }
+
+    public EmployeeDTO updatePartialEmployeeById(Long employeeId, Map<String, Object> updates) {
+        boolean exists=isExistByEmplyeeId(employeeId);
+        if(!exists) return null;
+        EmployeeEntity employeeEntity=employeeRepository.findById(employeeId).get();
+        updates.forEach((field,value)->{
+            Field fieldToBeUpdated=ReflectionUtils.findRequiredField(EmployeeEntity.class,field);
+            fieldToBeUpdated.setAccessible(true);
+            ReflectionUtils.setField(fieldToBeUpdated,employeeEntity,value);
+        });
+        return modelMapper.map(employeeRepository.save(employeeEntity),EmployeeDTO.class);
     }
 }
