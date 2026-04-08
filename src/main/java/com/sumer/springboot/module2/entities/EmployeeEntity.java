@@ -2,6 +2,7 @@ package com.sumer.springboot.module2.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ public class EmployeeEntity {
     private Long id;
 
     private String name;
+    @NotNull
 
     private String email;
 
@@ -27,4 +29,8 @@ public class EmployeeEntity {
 
     @JsonProperty ("isActive")
     private Boolean isActive;
+
+    private String role;
+
+    private Double Salary;
 }

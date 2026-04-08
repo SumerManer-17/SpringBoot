@@ -2,18 +2,18 @@ package com.sumer.springboot.module2.controllers;
 
 
 import com.sumer.springboot.module2.dto.EmployeeDTO;
-import com.sumer.springboot.module2.entities.EmployeeEntity;
+
 
 import com.sumer.springboot.module2.services.EmployeeService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -47,7 +47,7 @@ public class EmployeeController {
 
     }
 
-    @GetMapping(path="/")
+    @GetMapping
     public ResponseEntity<List<EmployeeDTO>> getAllEmployees(@RequestParam (required = false) Integer age){
         return ResponseEntity.ok(employeeService.getAllEmployees());
     }
@@ -57,8 +57,8 @@ public class EmployeeController {
 //        return "Hello from POST";
 //    }
 
-    @PostMapping(path="/")
-    public ResponseEntity<EmployeeDTO> createNewEmployee(@RequestBody EmployeeDTO inputEmployee){
+    @PostMapping
+    public ResponseEntity<EmployeeDTO> createNewEmployee(@RequestBody @Valid EmployeeDTO inputEmployee){
 
         EmployeeDTO savedEmployee=employeeService.createNewEmployee(inputEmployee);
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
