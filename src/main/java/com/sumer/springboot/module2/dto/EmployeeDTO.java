@@ -1,6 +1,7 @@
 package com.sumer.springboot.module2.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sumer.springboot.module2.annotations.EmployeeRoleValidation;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +28,8 @@ public class EmployeeDTO {
     private Integer age;
 
     @NotBlank
-    @Pattern(regexp = "^(ADMIN|USER)$")
+//    @Pattern(regexp = "^(ADMIN|USER)$")
+    @EmployeeRoleValidation
     private String role;//This should be either ADMIN or USER
 
     @PastOrPresent(message = "Date of joining should not be in future")

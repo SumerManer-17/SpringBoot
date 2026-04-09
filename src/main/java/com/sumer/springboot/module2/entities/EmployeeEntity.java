@@ -19,7 +19,6 @@ public class EmployeeEntity {
     private Long id;
 
     private String name;
-    @NotNull
 
     private String email;
 
