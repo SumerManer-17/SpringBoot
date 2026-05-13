@@ -15,6 +15,8 @@ import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
+    List<ProductEntity> findBy(Sort sort);
+
     List<ProductEntity> findByTitle(String title, Pageable pageable);
 
     List<ProductEntity> findByCreatedAtAfterOrderByTitle(LocalDateTime after);
