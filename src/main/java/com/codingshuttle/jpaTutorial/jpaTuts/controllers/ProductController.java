@@ -31,7 +31,9 @@ public class ProductController {
 //        return productRepository.findBy(Sort.by(Sort.Direction.DESC,sortBy,"price"));
 //        //if two values of sortBy are same then it will sorted on the price
 
-        Pageable pageable= PageRequest.of(pageNumber,PAGE_SIZE);
+        Pageable pageable= PageRequest.of(pageNumber
+                ,PAGE_SIZE,
+                Sort.by(sortBy));
 
         return productRepository.findAll(pageable).getContent();
     }
