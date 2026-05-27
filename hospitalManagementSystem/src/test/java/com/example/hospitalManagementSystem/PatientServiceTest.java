@@ -1,7 +1,9 @@
 package com.example.hospitalManagementSystem;
 
+import com.example.hospitalManagementSystem.Service.PatientService;
 import com.example.hospitalManagementSystem.dto.BloodGroupStats;
 import com.example.hospitalManagementSystem.dto.CPatientInfo;
+import com.example.hospitalManagementSystem.entity.Patient;
 import com.example.hospitalManagementSystem.repository.PatientRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ public class PatientServiceTest {
 
     @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    private PatientService patientService;
 
     @Test
     public void testPatient(){
@@ -28,9 +32,15 @@ public class PatientServiceTest {
 //            System.out.println(p);
 //        }
 
-        List<BloodGroupStats>bloodGroupStats=patientRepository.getBloodGroupStats();
-        for (BloodGroupStats b:bloodGroupStats){
-            System.out.println(b);
-        }
+//        List<BloodGroupStats>bloodGroupStats=patientRepository.getBloodGroupStats();
+//        for (BloodGroupStats b:bloodGroupStats){
+//            System.out.println(b);
+//        }
+//
+//        Patient patient=new Patient();
+//        patientRepository.save(patient);
+
+        patientService.testPatientTransaction();
+
     }
 }
